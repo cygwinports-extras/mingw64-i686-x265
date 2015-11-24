@@ -1,0 +1,22 @@
+CROSS_HOST="i686-w64-mingw32"
+inherit cross cmake
+
+NAME="mingw64-i686-x265"
+VERSION=1.7
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="H.265 video encoder library for Win32 toolchain"
+DESCRIPTION="x265 is a H.265/HEVC video encoder application library, designed
+to encode an uncompressed image sequence into an H.265/HEVC bitstream."
+HOMEPAGE="http://x265.org/"
+SRC_URI="https://bitbucket.org/multicoreware/x265/downloads/x265_${VERSION}.tar.gz"
+SRC_DIR="x265_${VERSION}"
+
+src_compile() {
+	cd ${B}
+	CYGCMAKE_SOURCE=${S}/source \
+	cygcmake -DENABLE_CLI=OFF
+	cygmake
+}
+
+DOCS="readme.rst"
